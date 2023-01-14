@@ -473,6 +473,12 @@ export function useFormik<Values extends FormikValues = FormikValues>({
     }
   }, [enableReinitialize, props.initialStatus, props.initialTouched]);
 
+  const [dirty, setDirty] = React.useState(!isEqual(initialValues.current, state.values));
+
+  React.useEffect(() => {
+    setDirty(!isEqual(initialValues.current, state.values))
+  }, [initialValues.current, state.values])
+
   const validateField = useEventCallback((name: string) => {
     // This will efficiently validate a single field by avoiding state
     // changes if the validation function is synchronous. It's different from
@@ -843,6 +849,7 @@ export function useFormik<Values extends FormikValues = FormikValues>({
     setValues,
     setFormikState,
     submitForm,
+    setDirty,
   };
 
   const executeSubmit = useEventCallback(() => {
@@ -930,10 +937,6 @@ export function useFormik<Values extends FormikValues = FormikValues>({
     [handleBlur, handleChange, state.values]
   );
 
-  const dirty = React.useMemo(
-    () => !isEqual(initialValues.current, state.values),
-    [initialValues.current, state.values]
-  );
 
   const isValid = React.useMemo(
     () =>
@@ -972,6 +975,7 @@ export function useFormik<Values extends FormikValues = FormikValues>({
     validateField,
     isValid,
     dirty,
+    setDirty,
     unregisterField,
     registerField,
     getFieldProps,
