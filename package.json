@@ -1,43 +1,78 @@
 {
-  "name": "formik-project",
-  "private": true,
-  "devDependencies": {
-    "@changesets/changelog-github": "^0.2.7",
-    "@changesets/cli": "^2.10.3",
-    "@types/jest": "^26.0.14",
-    "cypress": "^5.2.0",
-    "got": "10.0.4",
-    "husky": "^4.3.0",
-    "lerna": "^3.19.0",
-    "lint-staged": "^10.4.0",
-    "prettier": "^2.1.2",
-    "release": "6.0.1",
-    "tsdx": "^0.14.1",
-    "typescript": "^4.0.3"
-  },
-  "workspaces": [
-    "packages/*"
+  "name": "formik",
+  "description": "Build forms in React, without the tears",
+  "version": "2.2.9",
+  "license": "Apache-2.0",
+  "author": "Jared Palmer <jared@palmer.net> (https://jaredpalmer.com)",
+  "repository": "formium/formik",
+  "homepage": "https://formik.org",
+  "keywords": [
+    "formik",
+    "form",
+    "forms",
+    "react",
+    "react-dom",
+    "hooks",
+    "react hooks",
+    "validation",
+    "render props",
+    "validation",
+    "higher order component",
+    "hoc"
   ],
-  "scripts": {
-    "lerna": "lerna",
-    "dev": "lerna run start --stream --parallel",
-    "test": "lerna run test --",
-    "build": "lerna run build",
-    "prepublish": "lerna run prepublish",
-    "format": "prettier --write 'examples/**/*' 'packages/*/src/**/*' 'website/src/**/*.{ts,tsx,js,jsx,md,mdx}' 'app/pages/**/*'  'packages/*/test/**/*' 'README.md'",
-    "changeset": "changeset",
-    "release": "changeset publish",
-    "git-reset": "git reset --hard HEAD",
-    "git-clean": "git clean -d -x -e node_modules -e packages -f",
-    "cypress": "cypress run",
-    "precommit": "lint-staged",
-    "cypress:open": "cypress open",
-    "start:app": "npm run build && yarn --cwd packages/formik link && yarn --cwd node_modules/react link && yarn --cwd ./app link react formik && yarn --cwd ./app && yarn --cwd ./app run dev"
+  "funding": [
+    {
+      "type": "individual",
+      "url": "https://opencollective.com/formik"
+    }
+  ],
+  "main": "dist/index.js",
+  "umd:main": "dist/formik.umd.production.js",
+  "module": "dist/formik.esm.js",
+  "typings": "dist/index.d.ts",
+  "files": ["dist"],
+  "peerDependencies": {
+    "react": ">=16.8.0"
   },
-  "lint-staged": {
-    "**/*.{ts,tsx,md,mdx,js,jsx}": [
-      "npm run format",
-      "tsdx lint"
+  "scripts": {
+    "test": "tsdx test --env=jsdom",
+    "test:watch": "npm run test -- --watchAll",
+    "start": "tsdx watch --tsconfig tsconfig.build.json --verbose --noClean",
+    "build": "tsdx build --tsconfig tsconfig.build.json",
+    "lint": "tsdx lint",
+    "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "deepmerge": "^2.1.1",
+    "hoist-non-react-statics": "^3.3.0",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "react-fast-compare": "^2.0.1",
+    "tiny-warning": "^1.0.2",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^11.1.0",
+    "@types/hoist-non-react-statics": "^3.3.1",
+    "@types/lodash": "^4.14.119",
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
+    "@types/warning": "^3.0.0",
+    "@types/yup": "^0.24.9",
+    "just-debounce-it": "^1.1.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "yup": "^0.28.1"
+  },
+  "jest": {
+    "globals": {
+      "__DEV__": "boolean"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setupTests.ts"
     ]
   }
 }

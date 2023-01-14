@@ -1,3 +1,4 @@
+node_modules
 dist
 compiled
 *.log
@@ -7,18 +8,19 @@ next.d.ts
 legacy.d.ts
 .idea
 *.orig
+.DS_Store
 
 node_modules
-package-lock.json
-yarn.lock
-!/docs/yarn.lock
-!/yarn.lock
+
+lib/core/metadata.js
+lib/core/MetadataBlog.js
 
 website/translated_docs
-website/build
-!website/yarn.lock
+website/build/
+website/yarn.lock
 website/node_modules
-website/i18n
-!website2/yarn.lock
-.env
-.vercel
+website/i18n/*
+.rts2_cache_es
+.rts2_cache_esm
+.rts2_cache_cjs
+.rts2_cache_umd
