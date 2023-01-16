@@ -116,7 +116,7 @@ export interface FormikHelpers<Values> {
       | ((prevState: FormikState<Values>) => FormikState<Values>),
     cb?: () => void
   ) => void;
-  setDirty: (bool: boolean) => void;
+  setDirty: (dirty: boolean) => void;
 }
 
 /**
